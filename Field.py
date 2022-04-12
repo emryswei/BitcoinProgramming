@@ -1,0 +1,34 @@
+class FieldElements: 
+  # Range(0, prime-1)
+  def __init__(self, num, prime):
+    self.num = num
+    self.prime = prime
+    if num >= prime or num < 0:
+      raise ValueError("{} is not in the range 0 to {}".format(num, prime - 1))
+
+  def __repr__(self) -> str:
+      return "FieldElements_{}{}".format(self.num, self.prime)
+
+  # 用__eq__來比較value. python中使用==來比較class的instance時，會自動call __eq__ method
+  # object.__eq__(self, other)
+  # x == y calls x.__eq__(y)
+  '''
+  注意比較時，搞清是比較值，還是內存
+  '''
+  def __eq__(self, other) -> bool:
+      if other is None:
+        return False
+      return other.num == self.num and other.prime == self.prime 
+      # == 比較'值'是否相等，equality
+      ''' a = [1,2,3]
+      b = a 
+      c = a[:]
+      a == b -> true, a == c -> true
+      '''
+      # a is b -> true, a is c -> false
+      # 'is'比較兩個variables是否指向相同的reference, 如果兩個object的內存地址相同，則True
+      # 'is' check identity
+      
+
+  def __ne__(self, other) -> bool:
+      return not(self == other)
