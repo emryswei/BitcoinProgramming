@@ -32,3 +32,24 @@ class FieldElements:
 
   def __ne__(self, other) -> bool:
       return not(self == other)
+
+  def __add__(self, other):
+    if self.prime != other.prime:
+      raise ValueError("Cannot add two number in different field")
+    
+    # result = (self.num + other.num) % self.prime
+    # return self.__class__(result, self.prime)
+    '''
+    為了return an instance of a class, 所以用return self.__class__(num, self.prime)
+    return self.__class__(result, self.prime)會error: 
+    AttibuteError: "FieldElements" has no attribute 'result'
+    '''
+    num = (self.num + other.num) % self.prime
+    return self.__class__(num, self.prime)
+
+  def __sub__(self, other):
+    if self.prime != other.prime:
+      raise ValueError("Cannot add two number in different field")
+    num = (self.num - other.num) % self.prime
+    return self.__class__(num, self.prime)
+    # return result
