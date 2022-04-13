@@ -40,6 +40,10 @@ class FieldElements:
     # result = (self.num + other.num) % self.prime
     # return self.__class__(result, self.prime)
     '''
+    我們希望return的是一個新的class，可以方便inheritance
+    eg: a = FieldElements(3,11)
+        b = FieldElements(4,11)
+        c = a + b --> c = FieldElements(7,11)
     為了return an instance of a class, 所以用return self.__class__(num, self.prime)
     return self.__class__(result, self.prime)會error: 
     AttibuteError: "FieldElements" has no attribute 'result'
@@ -53,3 +57,15 @@ class FieldElements:
     num = (self.num - other.num) % self.prime
     return self.__class__(num, self.prime)
     # return result
+
+  def __mul__(self, other):
+    if self.prime != other.prime:
+      raise ValueError("Cannot add two number in different field")
+    num = (self.num * other.num) % self.prime
+    return self.__class__(num, self.prime)
+
+  def __pow__(self, other):
+    if self.prime != other.prime:
+      raise ValueError("Cannot add two number in different field")
+    num = (self.num ** other.num) % self.prime
+    return self.__class__(num, self.prime)
