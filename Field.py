@@ -65,9 +65,8 @@ class FieldElements:
     return self.__class__(num, self.prime)
 
   def __pow__(self, other):
-    if self.prime != other.prime:
-      raise ValueError("Cannot add two number in different field")
-    num = (self.num ** other.num) % self.prime
+    n = exponent % (self.prime - 1)
+    num = pow(self.num, n, self.prime)
     return self.__class__(num, self.prime)
   
   def __truediv__(self, other):
